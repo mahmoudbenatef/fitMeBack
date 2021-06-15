@@ -8,15 +8,8 @@ const { loginRequired } = require("../middlewares/AuthMiddleware.js");
 
 
 const register = async function (req, res) {
-
     const userData = req.body
-    userData.hash_password = bcrypt.hashSync(req.body.password, 10);
-
-    const userInstance = new UserModel({
-        firstname: userData.firstname, email: userData.email
-        , lastname: userData.lastname, gender: userData.gender, password: userData.hash_password
-        , role: userData.role, avatar: req.file.path, DOB: userData.DOB
-    })
+    const userInstance = new UserModel({ ...userData, avatar: req.file.path, password: bcrypt.hashSync(req.body.password, 10) })
     try {
         let user = await userInstance.save()
         user.password = undefined;

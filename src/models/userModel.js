@@ -11,15 +11,62 @@ const UserScheme = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: {
+
+  gender: {
     type: String,
-    // required: true,
+    //  required: true,
+    enum: ["Male", "Female"],
   },
+  maritalStatus: {
+    type: String,
+    required: true,
+    enum: ["single", "married", "divorced", "Widower"],
+    default: "single",
+  },
+
   email: {
     type: String,
     unique: true,
     lowercase: true,
     trim: true,
+  },
+  phone: {
+    type: String,
+    required: true,
+  },
+
+  nationality: {
+    type: String,
+    required: true,
+  },
+
+  countryOfResidence: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  NationalIdOrPassportNo: {
+    type: String,
+    required: true,
+  },
+  weight: {
+    type: Number,
+    required: true,
+  },
+  height: {
+    type: Number,
+    required: true,
+  },
+  basalMetabolicRate: {
+    type: Number,
+    required: true,
+  },
+  categoryID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
   },
   password: String,
   avatar: {
@@ -34,11 +81,6 @@ const UserScheme = new mongoose.Schema({
     required: true,
     enum: ["admin", "user", "author"],
     default: "user",
-  },
-  gender: {
-    type: String,
-    //  required: true,
-    enum: ["Male", "Female"],
   },
   created: {
     type: Date,
