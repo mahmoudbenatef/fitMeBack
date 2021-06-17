@@ -6,6 +6,8 @@ const cors = require("cors");
 const port = 3001;
 const app = express();
 const userRouter = require("./src/routes/userRoute");
+const mealRouter= require("./src/routes/mealRoute");
+const categoryRouter=require("./src/routes/categoryRoute");
 var userHandlers = require("./src/controllers/userController.js");
 
 
@@ -53,6 +55,8 @@ app.use(function (req, res, next) {
 
 // routes
 app.use("/users", userRouter);
+app.use("/meals",mealRouter);
+app.use("/categries",categoryRouter);
 
 app.get("/", (req, res) => {
   res.end("hello at home page atef");
