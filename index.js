@@ -56,7 +56,7 @@ app.use(function (req, res, next) {
 // routes
 app.use("/users", userRouter);
 app.use("/meals",mealRouter);
-app.use("/categries",categoryRouter);
+app.use("/categories",categoryRouter);
 
 app.get("/", (req, res) => {
   res.end("hello at home page atef");
