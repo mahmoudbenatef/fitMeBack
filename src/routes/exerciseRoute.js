@@ -9,6 +9,6 @@ const {
 } = require("../controllers/exerciseControllerl");
 
 Router.route("/").get(getAllExercise).post(createExercise);
-Router.route("/:id").delete(deleteExercise).patch(updateExercise);
+Router.route("/:exerciseId").delete(deleteExercise).patch(updateExercise);
 
 module.exports = Router;

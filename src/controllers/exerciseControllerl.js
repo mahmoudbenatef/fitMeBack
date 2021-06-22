@@ -2,39 +2,40 @@ const ExerciseModel = require("../models/exerciseModel");
 const statusCode = require("../helper/statusCode");
 const helper = require("../helper/controllersHelper");
 
-const getAllExercise = async (req, res, nex) => {
+const getAllExercise = async (req, res, next) => {
   const allExercise = await ExerciseModel.find();
   return res.status(statusCode.Success).json(allExercise);
 };
 
-const createExercise = async (req, res, nex) => {
+const createExercise = async (req, res, next) => {
   const data = req.body;
   // check if the body is empty
   if (helper.isEmptyObject(data)) {
-    helper.handelEmptyData(res);
+    return helper.handelEmptyData(res);
   }
 
   // should validate the data before create it
   const newExercise = new ExerciseModel({ ...data });
-  try {
+  newExercise.validate((err) => {
+    if (err)
+      return res.status(statusCode.BadRequest).json({ message: "not valide" });
     newExercise.save();
     return res.status(statusCode.Created).json(newExercise);
-  } catch (error) {
-    next(error);
-  }
+  });
 };
 const updateExercise = async (req, res, nex) => {
   const { exerciseId } = req.params;
   const data = req.body;
   // check if the body is empty or not
   if (helper.isEmptyObject(data) || !exerciseId) {
-    helper.handelEmptyData(res);
+    return helper.handelEmptyData(res);
   }
   try {
     const updated = await ExerciseModel.findOneAndUpdate(
       { _id: exerciseId },
-      data
-    ).getUpdate();
+      { ...data },
+      { new: true }
+    );
     return res.status(statusCode.Success).json(updated);
   } catch (error) {
     next(error);
