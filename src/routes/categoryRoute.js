@@ -8,3 +8,4 @@ Router.route("/").post(isAdmin, createOne).get(paginateMode(CategoryModel), getA
 // Router.route('/:id')
 Router.route("/:id").delete(isAdmin, deleteOne).put(updateOne)
 module.exports = Router
+
