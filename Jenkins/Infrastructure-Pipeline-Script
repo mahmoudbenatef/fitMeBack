@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+    
+    tools {
+        terraform 'terraform-11'
+    }
+    
+    parameters {
+        string(name: 'environment', defaultValue: 'prod', description: 'Workspace/environment file to use for deployment')
+    }
+    
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
+    
+    stages {
+        stage('Git Checkout') {
+            steps {
+                    git branch: 'terraform', credentialsId: 'github', url: 'https://github.com/mahmoudbenatef/fitMeBack.git'
+            }
+        }
+        stage('Terraform init') {
+            steps {
+                sh 'terraform init'
+                sh 'terraform workspace select default'
+            }
+        }
+        stage('Terraform plan & apply in prod environment') {
+            when {
+                expression {
+                    params.environment == "prod"
+                }
+                
+            }
+            steps {
+                sh 'terraform plan --var-file=prod.tfvars -input=false -lock=false'
+                sh 'terraform apply --var-file=prod.tfvars -auto-approve'
+            }
+        }
+        stage('Terraform plan & apply in dev environment') {
+            when {
+                expression {
+                    params.environment == "dev"
+                }
+            }
+            steps {
+                sh 'terraform plan --var-file=dev.tfvars -input=false -lock=false'
+                sh 'terraform apply --var-file=dev.tfvars -auto-approve'
+            }
+        }
+    }
+}
