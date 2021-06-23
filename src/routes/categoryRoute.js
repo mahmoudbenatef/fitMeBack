@@ -1,22 +1,11 @@
-const express = require("express");
+const express = require("express")
+const { createOne, getAll, deleteOne, updateOne } = require('../controllers/categoryController.js');
+const { isAdmin } = require("../middlewares/AdminMiddleware")
+const paginateMode = require("../middlewares/paginateModel");
 const CategoryModel = require("../models/categoryModel");
-const router = express.Router();
+Router = express.Router()
+Router.route("/").post(isAdmin, createOne).get(paginateMode(CategoryModel), getAll)
+// Router.route('/:id')
+Router.route("/:id").delete(isAdmin, deleteOne).put(updateOne)
+module.exports = Router
 
-router.post("/", async (req, res) => {
-  try {
-    console.log(req.body);
-    const category = await CategoryModel.create(req.body);
-    return res.json(category);
-  } catch (error) {
-    return res.send(error);
-  }
-});
-router.get("/", async (req, res) => {
-  try {
-    const category = await CategoryModel.find({});
-    return res.json(category);
-  } catch (error) {
-    return res.send(error);
-  }
-});
-module.exports = router;
