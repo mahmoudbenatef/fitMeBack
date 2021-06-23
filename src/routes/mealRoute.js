@@ -4,8 +4,7 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    console.log(req.body);
-    const meal = await MealModel.create(req.body);
+    const meal = await MealModel.create({ ...req.body });
     return res.json(meal);
   } catch (error) {
     return res.send("err1");
