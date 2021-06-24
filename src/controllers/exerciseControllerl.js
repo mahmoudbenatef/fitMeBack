@@ -3,8 +3,8 @@ const statusCode = require("../helper/statusCode");
 const helper = require("../helper/controllersHelper");
 
 const getAllExercise = async (req, res, next) => {
-  const allExercise = await ExerciseModel.find();
-  return res.status(statusCode.Success).json(allExercise);
+  // reture the paginate result
+  return res.status(statusCode.Success).json(req.paginatedResult);
 };
 
 const createExercise = async (req, res, next) => {
@@ -18,7 +18,9 @@ const createExercise = async (req, res, next) => {
   const newExercise = new ExerciseModel({ ...data });
   newExercise.validate((err) => {
     if (err)
-      return res.status(statusCode.BadRequest).json({ message: "not valide" });
+      return res
+        .status(statusCode.BadRequest)
+        .json({ message: "not valide", error: err });
     newExercise.save();
     return res.status(statusCode.Created).json(newExercise);
   });

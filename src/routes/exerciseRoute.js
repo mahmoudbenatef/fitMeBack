@@ -1,5 +1,7 @@
 const express = require("express"),
-  Router = express.Router();
+  Router = express.Router(),
+  paginate = require("../middlewares/paginateModel"),
+  ExerciseModel = require("../models/exerciseModel");
 
 const {
   createExercise,
@@ -8,7 +10,9 @@ const {
   updateExercise,
 } = require("../controllers/exerciseControllerl");
 
-Router.route("/").get(getAllExercise).post(createExercise);
+Router.route("/")
+  .get(paginate(ExerciseModel), getAllExercise)
+  .post(createExercise);
 Router.route("/:exerciseId").delete(deleteExercise).patch(updateExercise);
 
 module.exports = Router;
