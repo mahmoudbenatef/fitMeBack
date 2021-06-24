@@ -75,15 +75,15 @@ async function updateExceptional(req, res) {
 
 const getOne = async (req, res) => {
     const id = req.params.id;
-    const day = req.params.date;
+    const date = req.params.date;
     try {
         const currentUserPlan = await PlanModel.findOne(
-            { user: id, day },
+            { user: id, date },
             { _id: 0 }
         )
             .populate("breakfast", { name: 1, recipe: 1 })
             .populate("dinner", { name: 1, recipe: 1 })
-            .populate("launch", { name: 1, recipe: 1 });
+            .populate("lunch", { name: 1, recipe: 1 });
         res.json(currentUserPlan);
     } catch (error) {
         res.status(500).json(error);
@@ -91,9 +91,9 @@ const getOne = async (req, res) => {
 };
 const updateOne = async (req, res) => {
     const id = req.params.id;
-    const day = req.params.date;
+    const date = req.params.date;
     try {
-        const currentUpdate = await PlanModel.findOneAndUpdate({ user: id, day }, req.body, {
+        const currentUpdate = await PlanModel.findOneAndUpdate({ user: id, date }, req.body, {
             new: true,
         }).exec();
         res.json(currentUpdate);
