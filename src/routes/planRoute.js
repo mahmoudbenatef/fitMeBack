@@ -1,5 +1,5 @@
 const express = require("express")
-const { createOne, createForRegular, getRegular, updateRegular, createForExceptional, getExceptional, updateExceptional } = require('../controllers/planController');
+const { createOne, createForRegular, getRegular, updateRegular, createForExceptional, getExceptional, updateExceptional, getOne, updateOne } = require('../controllers/planController');
 const { isAdmin } = require("../middlewares/AdminMiddleware")
 const Router = express.Router();
 Router.route("/").post(isAdmin, createOne);

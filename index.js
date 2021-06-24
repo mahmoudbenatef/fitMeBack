@@ -8,7 +8,6 @@ const app = express();
 const userRouter = require("./src/routes/userRoute");
 const mealRouter = require("./src/routes/mealRoute");
 const categoryRouter = require("./src/routes/categoryRoute");
-const planRoute = require("./src/routes/planRoute");
 
 var userHandlers = require("./src/controllers/userController.js");
 const questionerRouter = require("./src/routes/questionerRoute");

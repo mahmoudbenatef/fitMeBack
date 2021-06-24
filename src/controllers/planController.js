@@ -44,7 +44,6 @@ const getRegular = async (req, res) => {
     }
 };
 async function getExceptional(req, res) {
-    console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     try {
         const plan = await PlanModel.findOne({ camp: req.params.camp, date: req.params.date, user: req.params.user }).lean().exec();
         res.status(201).json(plan);
@@ -63,14 +62,46 @@ async function updateRegular(req, res) {
 }
 
 async function updateExceptional(req, res) {
+    console.log("baaaaaaaaaaaaaaakr");
     try {
-        const plan = await PlanModel.update({ camp: req.params.camp, date: req.params.date, user: req.params.user }, { "$set": { ...req.body } }, { "multi": true })
+        const plan = await PlanModel.updateMany({ camp: req.params.camp, date: req.params.date, user: req.params.user }, { "$set": { ...req.body } }, { "multi": true })
+        console.log("haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaateeeeeeeeeeeeeeeeeeeeem");
         res.status(201).json(plan);
     } catch (err) {
         res.status(500).json(err);
     }
 
 }
+
+const getOne = async (req, res) => {
+    const id = req.params.id;
+    const day = req.params.date;
+    try {
+        const currentUserPlan = await PlanModel.findOne(
+            { user: id, day },
+            { _id: 0 }
+        )
+            .populate("breakfast", { name: 1, recipe: 1 })
+            .populate("dinner", { name: 1, recipe: 1 })
+            .populate("launch", { name: 1, recipe: 1 });
+        res.json(currentUserPlan);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+const updateOne = async (req, res) => {
+    const id = req.params.id;
+    const day = req.params.date;
+    try {
+        const currentUpdate = await PlanModel.findOneAndUpdate({ user: id, day }, req.body, {
+            new: true,
+        }).exec();
+        res.json(currentUpdate);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
 module.exports = {
     createOne,
     createForRegular,
@@ -78,5 +109,7 @@ module.exports = {
     updateRegular,
     createForExceptional,
     getExceptional,
-    updateExceptional
+    updateExceptional,
+    getOne,
+    updateOne,
 }

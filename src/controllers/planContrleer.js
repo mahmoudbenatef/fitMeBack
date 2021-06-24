@@ -26,9 +26,9 @@ const getOne = async (req, res) => {
 };
 const updateOne = async (req, res) => {
   const id = req.params.id;
-  const day=req.params.date;
+  const day = req.params.date;
   try {
-    const currentUpdate = await PlanModel.findOneAndUpdate({user:id,day}, req.body, {
+    const currentUpdate = await PlanModel.findOneAndUpdate({ user: id, day }, req.body, {
       new: true,
     }).exec();
     res.json(currentUpdate);
