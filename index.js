@@ -10,6 +10,8 @@ const mealRouter = require("./src/routes/mealRoute");
 const categoryRouter = require("./src/routes/categoryRoute");
 const questionerRouter = require("./src/routes/questionerRoute");
 const campRoute = require("./src/routes/campRoute");
+const planRoute = require("./src/routes/planRoute");
+
 app.use("/public", express.static("public"));
 
 mongoose.connect(
@@ -58,6 +60,7 @@ app.use("/category", categoryRouter);
 app.use('/questioner', questionerRouter);
 app.use("/camp", campRoute);
 app.use("/meals", mealRouter);
+app.use("/plan", planRoute);
 app.get("/", (req, res) => {
   res.end("hello at home page atef");
 });

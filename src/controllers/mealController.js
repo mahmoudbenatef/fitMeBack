@@ -10,7 +10,7 @@ async function getBreakfast(req, res) {
 }
 async function getlaunch(req, res) {
     try {
-        const meals = await MealModel.find({ mealType: "launch" })
+        const meals = await MealModel.find({ mealType: "lunch" })
         res.status(200).json(meals);
     }
     catch (e) {
