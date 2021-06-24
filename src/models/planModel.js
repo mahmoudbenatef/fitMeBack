@@ -5,10 +5,16 @@ const PlanScheme = new mongoose.Schema({
         ref: "User",
         required: true,
     },
-    day: {
+    date: {
         type: Date,
         default: Date.now()
     },
+    camp: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Camp",
+        required: true,
+    },
+
     breakfast: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Meal",
@@ -19,13 +25,15 @@ const PlanScheme = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    launch: {
+    lunch: {
+
         type: mongoose.Schema.Types.ObjectId,
         ref: "Meal",
         required: true,
     },
 
-    launchCheck: {
+    lunchCheck: {
+
         type: Boolean,
         default: false,
     },
@@ -38,6 +46,12 @@ const PlanScheme = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    type: {
+        type: String,
+        enum: ["regular", "exceptional"],
+        default: "exceptional"
+    },
+
     created: {
         type: Date,
         default: Date.now,
@@ -45,3 +59,4 @@ const PlanScheme = new mongoose.Schema({
 });
 const PlanModel = mongoose.model("Plan", PlanScheme);
 module.exports = PlanModel;
+

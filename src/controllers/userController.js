@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt'),
 
 var mongoose = require('mongoose')
 const { loginRequired } = require("../middlewares/AuthMiddleware.js");
+const CategoryModel = require("../models/categoryModel");
 
 
 const register = async function (req, res) {
@@ -46,8 +47,21 @@ const users = async function (req, res) {
     }
 
 }
+const exceptionalUsers = async function (req, res) {
+
+    try {
+        const exceptionalCat = await CategoryModel.findOne({ label: 'exceptional' })
+        console.log(exceptionalCat);
+        const users = await UserModel.find({ categoryID: exceptionalCat })
+        res.status(201).json(users)
+    }
+    catch (err) {
+        res.send("bye")
+    }
+
+}
 
 
 module.exports = {
-    register, sign_in, users
+    register, sign_in, users, exceptionalUsers
 }

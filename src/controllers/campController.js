@@ -27,7 +27,16 @@ const createOne = async (req, res) => {
         res.status(500).json(err);
     }
 };
+async function getCamp(req, res) {
+    try {
+        const camp = await CampModel.findById(req.params.id);
+        res.status(200).json(camp)
 
+    }
+    catch (err) {
+        res.status(500).json(err)
+    }
+}
 function validateDate(date) {
     var ToDate = new Date();
     if (new Date(date).getTime() <= ToDate.getTime()) {
@@ -104,4 +113,5 @@ module.exports = {
     updateOne,
     getAvailCamps,
     registerUser,
+    getCamp
 };
