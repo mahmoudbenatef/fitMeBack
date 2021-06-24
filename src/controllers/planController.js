@@ -10,6 +10,16 @@ const createOne = async (req, res) => {
         res.status(500).json(err);
     }
 };
+async function createForExceptional(req, res) {
+    try {
+        const plan = await new PlanModel({ ...req.body }).save();
+        res.status(201).json(plan);
+    }
+    catch (err) {
+        res.status(500).json(err);
+
+    }
+}
 const createForRegular = async (req, res) => {
     try {
         const exceptionalCat = await CategoryModel.findOne({ label: 'exceptional' })
@@ -33,9 +43,28 @@ const getRegular = async (req, res) => {
         res.status(500).json(err);
     }
 };
+async function getExceptional(req, res) {
+    console.log("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    try {
+        const plan = await PlanModel.findOne({ camp: req.params.camp, date: req.params.date, user: req.params.user }).lean().exec();
+        res.status(201).json(plan);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
 async function updateRegular(req, res) {
     try {
         const plan = await PlanModel.update({ camp: req.params.camp, date: req.params.date, type: "regular" }, { "$set": { ...req.body } }, { "multi": true })
+        res.status(201).json(plan);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+
+}
+
+async function updateExceptional(req, res) {
+    try {
+        const plan = await PlanModel.update({ camp: req.params.camp, date: req.params.date, user: req.params.user }, { "$set": { ...req.body } }, { "multi": true })
         res.status(201).json(plan);
     } catch (err) {
         res.status(500).json(err);
@@ -46,5 +75,8 @@ module.exports = {
     createOne,
     createForRegular,
     getRegular,
-    updateRegular
+    updateRegular,
+    createForExceptional,
+    getExceptional,
+    updateExceptional
 }
