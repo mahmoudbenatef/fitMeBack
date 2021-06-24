@@ -13,6 +13,8 @@ const planRoute = require("./src/routes/planRoute");
 var userHandlers = require("./src/controllers/userController.js");
 const questionerRouter = require("./src/routes/questionerRoute");
 const campRoute = require("./src/routes/campRoute");
+const planRoute = require("./src/routes/planRoute");
+
 app.use("/public", express.static("public"));
 
 mongoose.connect(

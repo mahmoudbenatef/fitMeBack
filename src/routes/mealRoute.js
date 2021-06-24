@@ -1,6 +1,11 @@
 const express = require("express");
 const MealModel = require("../models/mealModel");
 const router = express.Router();
+const { getBreakfast, getDinner, getlaunch } = require('../controllers/mealController');
+console.log("inside Meal");
+router.get("/breakfast", getBreakfast);
+router.get("/launch", getlaunch);
+router.get("/dinner", getDinner);
 
 router.post("/", async (req, res) => {
   try {
