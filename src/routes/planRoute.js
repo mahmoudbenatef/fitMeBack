@@ -9,3 +9,4 @@ Router.route("/regular/:camp/:date").get(isAdmin, getRegular).put(isAdmin, updat
 Router.route("/exceptional/:camp/:date/:user").get(isAdmin, getExceptional)
     .put(isAdmin, updateExceptional);
 module.exports = Router;
+

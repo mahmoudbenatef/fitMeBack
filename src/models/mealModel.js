@@ -13,6 +13,7 @@ const MealScheme = new mongoose.Schema({
     type: String,
     enum: ["breakfast", "brunch", "lunch", "dinner"],
   },
+
   notAllowedTo: [
     {
       category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
