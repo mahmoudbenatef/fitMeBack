@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+let currentDate = new Date();
+currentDate.setUTCHours(0, 0, 0, 0);
 const PlanScheme = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
