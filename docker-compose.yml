@@ -5,12 +5,12 @@ services:
         volumes: 
             - ./mongodata:/data
         ports:
-            - "27017:27017"
+            - "27018:27017"
             
     back:
         image: beshlawy38/fitmeback
         ports: 
-            - "80:80"
+            - "3001:3001"
         volumes: 
             - ./back:/home/node/code
             - /home/node/code/node_modules
@@ -19,6 +19,7 @@ services:
             - db
         environment: 
             MONGO_CONNECTION_STRING: mongodb://db:27017
+
     front:
         image: beshlawy38/fitmefront
         ports:
@@ -29,7 +30,5 @@ services:
              - /home/react/code/.git
         links: 
              - back
-        environment: 
-            BACKEND_CONNECTION: back:80
             
             
