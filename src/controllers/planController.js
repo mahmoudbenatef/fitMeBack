@@ -23,7 +23,6 @@ async function createForExceptional(req, res) {
 const createForRegular = async (req, res) => {
     try {
         const exceptionalCat = await CategoryModel.findOne({ label: 'exceptional' })
-
         const regularUsersInCamp = await CampModel.findById(req.body.camp).populate("users").lean().exec();
         regularUsersInCamp["users"].forEach(async function (user) {
             if (user.categoryID !== exceptionalCat)
