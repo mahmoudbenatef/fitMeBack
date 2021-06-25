@@ -18,6 +18,7 @@ const exericseRoute = require("./src/routes/exerciseRoute");
 app.use("/public", express.static("public"));
 
 mongoose.connect(
+
    process.env.MONGO_CONNECTION_STRING+"/goodreads"||
   "mongodb://localhost:27017/fitMe",
   {
@@ -30,7 +31,7 @@ mongoose.connect(
     if (err) {
       console.log("falied to connect mongo");
       console.log(process.env.MONGODB_URI, "monkooooo");
-    } else console.log("connected successfully to mongo");
+    } else console.log("connected successfully to mongoooooooooooooseeeeeeeeeeeeeeee");
   }
 );
 

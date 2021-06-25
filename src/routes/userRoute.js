@@ -14,6 +14,6 @@ Router.post("/signin", sign_in)
 
 Router.get("/", loginRequired, users)
 
-Router.get("/exceptional", loginRequired, exceptionalUsers)
+Router.get("/exceptional/:camp", loginRequired, exceptionalUsers)
 
 module.exports = Router
