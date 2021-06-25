@@ -35,7 +35,6 @@ const PlanScheme = new mongoose.Schema({
     },
 
     lunchCheck: {
-
         type: Boolean,
         default: false,
     },
@@ -45,6 +44,33 @@ const PlanScheme = new mongoose.Schema({
         required: true,
     },
     dinnerCheck: {
+        type: Boolean,
+        default: false,
+    },
+    exercise1: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Exercise",
+        required: true,
+    },
+    exercise2: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Exercise",
+        required: true,
+    },
+    exercise3: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Exercise",
+        required: true,
+    },
+    exercise1Check: {
+        type: Boolean,
+        default: false,
+    },
+    exercise2Check: {
+        type: Boolean,
+        default: false,
+    },
+    exercise3Check: {
         type: Boolean,
         default: false,
     },
