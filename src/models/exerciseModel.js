@@ -5,6 +5,9 @@ const exerciseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  videoId: {
+    type: String,
+  },
   description: {
     type: String,
     required: true,

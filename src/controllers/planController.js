@@ -107,9 +107,9 @@ const getOne = async (req, res) => {
       { user: id, date },
       { _id: 0 }
     )
-      .populate("breakfast", { name: 1, recipe: 1 })
-      .populate("dinner", { name: 1, recipe: 1 })
-      .populate("lunch", { name: 1, recipe: 1 })
+      .populate("breakfast", { name: 1, recipe: 1 ,videoId:1})
+      .populate("dinner", { name: 1, recipe: 1,videoId:1 })
+      .populate("lunch", { name: 1, recipe: 1 ,videoId:1})
       .populate("exercise1")
       .populate("exercise2")
       .populate("exercise3");
