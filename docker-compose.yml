@@ -1,0 +1,35 @@
+version: "3"
+services:
+    db:
+        image: mongo
+        volumes: 
+            - ./mongodata:/data
+        ports:
+            - "27017:27017"
+            
+    back:
+        image: beshlawy38/fitmeback
+        ports: 
+            - "80:80"
+        volumes: 
+            - ./back:/home/node/code
+            - /home/node/code/node_modules
+            - /home/node/code/.git
+        links: 
+            - db
+        environment: 
+            MONGO_CONNECTION_STRING: mongodb://db:27017
+    front:
+        image: beshlawy38/fitmefront
+        ports:
+            - "3000:3000"
+        volumes: 
+             - ./front:/home/react/code
+             - /home/react/code/node_modules
+             - /home/react/code/.git
+        links: 
+             - back
+        environment: 
+            BACKEND_CONNECTION: back:80
+            
+            
