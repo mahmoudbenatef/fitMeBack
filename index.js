@@ -18,7 +18,8 @@ const exericseRoute = require("./src/routes/exerciseRoute");
 app.use("/public", express.static("public"));
 
 mongoose.connect(
-  // process.env.MONGO_CONNECTION_STRING + "/fitMe" ||
+
+   process.env.MONGO_CONNECTION_STRING+"/goodreads"||
   "mongodb://localhost:27017/fitMe",
   {
     useNewUrlParser: true,
