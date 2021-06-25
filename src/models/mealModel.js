@@ -9,6 +9,9 @@ const MealScheme = new mongoose.Schema({
     type: String,
     required: true,
   },
+  videoId: {
+    type: String,
+  },
   mealType: {
     type: String,
     enum: ["breakfast", "brunch", "lunch", "dinner"],
