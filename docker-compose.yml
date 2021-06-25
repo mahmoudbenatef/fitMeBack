@@ -8,27 +8,28 @@ services:
             - "27018:27017"
             
     back:
-        image: beshlawy38/fitmeback
+        build: ./fitMeBack/
         ports: 
             - "3001:3001"
         volumes: 
-            - ./back:/home/node/code
+            - ./fitMeBack:/home/node/code
             - /home/node/code/node_modules
             - /home/node/code/.git
         links: 
             - db
         environment: 
             MONGO_CONNECTION_STRING: mongodb://db:27017
-
     front:
-        image: beshlawy38/fitmefront
+        build: ./fitMeFront/
         ports:
             - "3000:3000"
         volumes: 
-             - ./front:/home/react/code
+             - ./fitMeFront:/home/react/code
              - /home/react/code/node_modules
              - /home/react/code/.git
         links: 
              - back
+        environment: 
+            BACKEND_CONNECTION: back:3000
             
             
