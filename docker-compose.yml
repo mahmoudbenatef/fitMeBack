@@ -31,6 +31,8 @@ services:
              - /home/react/code/.git
         links: 
              - back
+        stdin_open: true
+        tty: true
         depends_on: 
              - back
         environment: 
