@@ -17,6 +17,8 @@ services:
             - /home/node/code/.git
         links: 
             - db
+        stdin_open: true
+        tty: true
         depends_on: 
             - db
         environment: 
@@ -31,6 +33,8 @@ services:
              - /home/react/code/.git
         links: 
              - back
+        stdin_open: true
+        tty: true
         depends_on: 
              - back
         environment: 
