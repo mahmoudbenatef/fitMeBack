@@ -22,7 +22,7 @@ services:
     front:
         image: beshlawy38/fitmefront:latest
         ports:
-            - "3000:3000"
+            - "80:80"
         volumes: 
              - ./fitMeFront:/home/react/code
              - /home/react/code/node_modules
