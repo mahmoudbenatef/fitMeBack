@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt'),
 
 var mongoose = require('mongoose')
 const { loginRequired } = require("../middlewares/AuthMiddleware.js");
+const CategoryModel = require("../models/categoryModel");
+const CampModel = require("../models/campModel");
 
 
 const register = async function (req, res) {
@@ -19,6 +21,8 @@ const register = async function (req, res) {
         res.status(500).json(err)
     }
 };
+
+
 
 const sign_in = function (req, res) {
     UserModel.findOne({
@@ -44,8 +48,26 @@ const users = async function (req, res) {
     }
 
 }
+const exceptionalUsers = async function (req, res) {
+
+    try {
+        const exceptionalCat = await CategoryModel.findOne({ label: 'exceptional' })
+        console.log(exceptionalCat);
+        const users = await UserModel.findOne({ categoryID: exceptionalCat })
+        const data = await CampModel.findOne({ _id: req.params.camp }).populate({
+            path: "users",
+            "match": { categoryID: exceptionalCat }
+        })
+        console.log("daaataaaaaaaaaaaaaaaaaaaaaaaaaaaa", data);
+        res.status(201).json(data)
+    }
+    catch (err) {
+        res.send("bye")
+    }
+
+}
 
 
 module.exports = {
-    register, sign_in, users
+    register, sign_in, users, exceptionalUsers
 }

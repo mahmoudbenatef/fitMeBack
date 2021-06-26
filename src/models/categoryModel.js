@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 
 const CategoryScheme = new mongoose.Schema({
-    name: {
+    label: {
         type: String,
         required: true,
     },
