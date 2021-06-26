@@ -1,0 +1,24 @@
+pipeline {
+    agent { label 'aws-slave' }
+
+    stages {
+        stage('Preparation') {
+            steps {
+                git branch: 'devops', credentialsId: 'github', url: 'https://github.com/mahmoudbenatef/fitMeBack.git'
+            }
+        }
+
+        stage('Pull') {
+            steps {
+                sh 'sudo docker-compose pull'
+            }
+        }
+        
+        stage('Run') {
+            steps {
+                sh 'sudo docker-compose up'
+            }
+        }
+        
+    }
+}
