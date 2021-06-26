@@ -9,5 +9,6 @@ Router.route("/availCamps").get(getAvailCamps);
 Router.route("/:id").delete(isAdmin, deleteOne).put(isAdmin, updateOne)
     .get(isAdmin, getCamp);
 
+
 Router.get("/:campID/:userID", registerUser);
 module.exports = Router;
