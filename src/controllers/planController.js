@@ -107,12 +107,13 @@ const getOne = async (req, res) => {
       { user: id, date },
       { _id: 0 }
     )
-      .populate("breakfast", { name: 1, recipe: 1 ,videoId:1})
-      .populate("dinner", { name: 1, recipe: 1,videoId:1 })
-      .populate("lunch", { name: 1, recipe: 1 ,videoId:1})
+      .populate("breakfast", { name: 1, recipe: 1, videoId: 1 })
+      .populate("dinner", { name: 1, recipe: 1, videoId: 1 })
+      .populate("lunch", { name: 1, recipe: 1, videoId: 1 })
       .populate("exercise1")
       .populate("exercise2")
-      .populate("exercise3");
+      .populate("exercise3")
+      .populate("camp");
 
     res.json(currentUserPlan);
   } catch (error) {
@@ -135,6 +136,26 @@ const updateOne = async (req, res) => {
     res.status(500).json(error);
   }
 };
+const reviewOne = async (req, res) => {
+  const id = req.params.id;
+  const date = req.params.date;
+  try {
+    const currentUserPlan = await PlanModel.findOne(
+      { user: id, date },
+      { _id: 0, camp: 1 }
+    );
+    console.log(currentUserPlan.camp);
+    const campReview = await CampModel.findByIdAndUpdate(
+      currentUserPlan.camp,
+      { $push: { reviews: { user: id, rate: req.body.rate } } },
+      { new: true }
+    ).exec();
+
+    res.json(campReview);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 
 module.exports = {
   createOne,
@@ -146,4 +167,5 @@ module.exports = {
   updateExceptional,
   getOne,
   updateOne,
+  reviewOne,
 };
