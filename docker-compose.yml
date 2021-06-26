@@ -17,10 +17,6 @@ services:
             - /home/node/code/.git
         links: 
             - db
-        stdin_open: true
-        tty: true
-        depends_on: 
-            - db
         environment: 
             MONGO_CONNECTION_STRING: mongodb://db:27017
     front:
@@ -32,10 +28,6 @@ services:
              - /home/react/code/node_modules
              - /home/react/code/.git
         links: 
-             - back
-        stdin_open: true
-        tty: true
-        depends_on: 
              - back
         environment: 
             BACKEND_CONNECTION: back:3000
