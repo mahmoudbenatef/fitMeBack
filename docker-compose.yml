@@ -30,6 +30,6 @@ services:
         links: 
              - back
         environment: 
-            BACKEND_CONNECTION: back:3000
+            BACKEND_CONNECTION: back:3001
             
             
