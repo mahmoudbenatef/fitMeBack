@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket         = "vpc-bucket-demoo"
+    bucket         = "vpc-bucket-gp-iti"
     key            = "dev/terraform.tfstate"
-    region         = "eu-west-1"
-    dynamodb_table = "mytable-terraform-demo"
+    region         = "eu-central-1"
+    dynamodb_table = "mytable-terraform-gp"
   }
 }
