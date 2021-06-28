@@ -2,7 +2,7 @@ name = "prod"
 
 cidr = "10.0.0.0/16"
 
-ami = "ami-08962a4068733a2b6"
+ami = "ami-05f7491af5eef733a"
 
 public-1_subnet_cidr = "10.0.1.0/24"
 
