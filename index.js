@@ -19,7 +19,7 @@ app.use("/public", express.static("public"));
 
 mongoose.connect(
 
-  //  process.env.MONGO_CONNECTION_STRING+"/goodreads"||
+  process.env.MONGO_CONNECTION_STRING+"/fitMe"||
   "mongodb://localhost:27017/fitMe",
   {
     useNewUrlParser: true,
