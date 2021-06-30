@@ -8,6 +8,8 @@ const app = express();
 const userRouter = require("./src/routes/userRoute");
 const mealRouter = require("./src/routes/mealRoute");
 const categoryRouter = require("./src/routes/categoryRoute");
+const conversationRouter = require("./src/routes/conversationRoute");
+const messageRouter = require("./src/routes/messageRoute");
 
 const questionerRouter = require("./src/routes/questionerRoute");
 const campRoute = require("./src/routes/campRoute");
@@ -19,7 +21,7 @@ app.use("/public", express.static("public"));
 
 mongoose.connect(
 
-  process.env.MONGO_CONNECTION_STRING+"/fitMe"||
+  // process.env.MONGO_CONNECTION_STRING + "/fitMe" ||
   "mongodb://localhost:27017/fitMe",
   {
     useNewUrlParser: true,
@@ -64,6 +66,8 @@ app.use("/category", categoryRouter);
 app.use("/questioner", questionerRouter);
 app.use("/camp", campRoute);
 app.use("/meals", mealRouter);
+app.use("/conversations", conversationRouter)
+app.use("/messages", messageRouter)
 
 app.use("/plan", planRoute);
 app.use("/exercsie", exericseRoute);
