@@ -48,7 +48,9 @@ const createOne = async (req, res) => {
 
 const getAll = async (req, res) => {
     try {
-        const messages = await MessageModel.find({ conversation: req.body.conversationId })
+        const messages = await MessageModel.find({ conversation: req.params.conversationId })
+            .populate("receiver").populate("sender");
+
         return res.status(200).json(messages);
     }
     catch (err) {
