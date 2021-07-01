@@ -4,7 +4,12 @@ const ConversationModel = require("../models/conversationModel");
 const createOne = async (req, res) => {
     try {
         const doc = await new ConversationModel({ ...req.body }).save();
-        res.status(200).json({ data: doc });
+        const conversation = await ConversationModel.findById(doc._id)
+            .populate({
+                path: 'users',
+            })
+            .lean().exec();
+        res.status(200).json(conversation);
     } catch (err) {
         res.status(500).json(err);
     }
