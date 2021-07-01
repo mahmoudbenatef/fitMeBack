@@ -28,7 +28,7 @@ const createForRegular = async (req, res) => {
       .lean()
       .exec();
     regularUsersInCamp["users"].forEach(async function (user) {
-      if (user.categoryID !== exceptionalCat)
+      if (!user.categoryID||(user.categoryID !== exceptionalCat))
         await new PlanModel({
           ...req.body,
           user: user._id,
@@ -71,7 +71,7 @@ async function getExceptional(req, res) {
 }
 async function updateRegular(req, res) {
   try {
-    const plan = await PlanModel.update(
+    const plan = await PlanModel.updateMany(
       { camp: req.params.camp, date: req.params.date, type: "regular" },
       { $set: { ...req.body } },
       { multi: true }
