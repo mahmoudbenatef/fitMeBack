@@ -30,3 +30,8 @@ COPY . .
 # Exports
 EXPOSE 3001
 CMD ["npm","start"]
+COPY --chown=node:node package-lock.json package.json ./
+RUN npm ci
+COPY --chown=node:node . . 
+EXPOSE 3001
+CMD ["nodemon", "index.js"]
