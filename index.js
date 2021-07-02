@@ -21,7 +21,7 @@ app.use("/public", express.static("public"));
 const uri = process.env.MONGODB_URI;
 mongoose.connect(
 
-	uri
+  'mongodb+srv://atef:iwasbornin1998@cluster0.oqrmg.mongodb.net/angular?retryWrites=true&w=majority;'
   ,
   {
     useNewUrlParser: true,
