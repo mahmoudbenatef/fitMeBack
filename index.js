@@ -18,11 +18,11 @@ var userHandlers = require("./src/controllers/userController.js");
 const exericseRoute = require("./src/routes/exerciseRoute");
 
 app.use("/public", express.static("public"));
-
+const uri = process.env.MONGODB_URI;
 mongoose.connect(
 
-  // process.env.MONGO_CONNECTION_STRING + "/fitMe" ||
-  "mongodb://localhost:27017/fitMe",
+	uri
+  ,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
