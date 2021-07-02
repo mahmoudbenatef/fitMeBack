@@ -8,6 +8,8 @@ const app = express();
 const userRouter = require("./src/routes/userRoute");
 const mealRouter = require("./src/routes/mealRoute");
 const categoryRouter = require("./src/routes/categoryRoute");
+const conversationRouter = require("./src/routes/conversationRoute");
+const messageRouter = require("./src/routes/messageRoute");
 
 const questionerRouter = require("./src/routes/questionerRoute");
 const campRoute = require("./src/routes/campRoute");
@@ -16,11 +18,11 @@ var userHandlers = require("./src/controllers/userController.js");
 const exericseRoute = require("./src/routes/exerciseRoute");
 
 app.use("/public", express.static("public"));
-
+const uri = process.env.MONGODB_URI;
 mongoose.connect(
 
-  //  process.env.MONGO_CONNECTION_STRING+"/goodreads"||
-  "mongodb://localhost:27017/fitMe",
+  'mongodb+srv://atef:iwasbornin1998@cluster0.oqrmg.mongodb.net/angular?retryWrites=true&w=majority;'
+  ,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -64,6 +66,8 @@ app.use("/category", categoryRouter);
 app.use("/questioner", questionerRouter);
 app.use("/camp", campRoute);
 app.use("/meals", mealRouter);
+app.use("/conversations", conversationRouter)
+app.use("/messages", messageRouter)
 
 app.use("/plan", planRoute);
 app.use("/exercsie", exericseRoute);
