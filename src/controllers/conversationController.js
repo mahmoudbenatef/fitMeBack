@@ -3,7 +3,22 @@ const ConversationModel = require("../models/conversationModel");
 
 const createOne = async (req, res) => {
     try {
-        const doc = await new ConversationModel({ ...req.body }).save();
+        let doc = await ConversationModel.findOneAndUpdate({ "users": { "$in": req.body.users } }, { ...req.body },
+            {
+                new: true,
+                upsert: true
+            }
+        ).exec();
+        // console.log("hereeee");
+
+        /*
+  new: true,
+  upsert: true,
+  rawResult: true // Return the raw result from the MongoDB driver
+});
+        
+        */
+        // const doc = await new ConversationModel({ ...req.body }).save();
         const conversation = await ConversationModel.findById(doc._id)
             .populate({
                 path: 'users',
