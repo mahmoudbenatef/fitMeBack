@@ -43,13 +43,14 @@ const updateUserCategory = async (questioner) => {
     ) {
         const exceptionalCat = await CategoryModel.findOne({ label: 'exceptional' })
 
-        user = await UserModel.findOneAndUpdate({ _id: questioner.user }, { categoryID: exceptionalCat._id })
+        user = await UserModel.findOneAndUpdate({ _id: questioner.user }, { categoryID: exceptionalCat._id }, { new: true })
+            .exec();
         console.log(user);
         return user
     }
     else {
         const regularCat = await CategoryModel.findOne({ label: 'regular' })
-        user = await UserModel.findOneAndUpdate({ _id: questioner.user }, { categoryID: regularCat._id })
+        user = await UserModel.findOneAndUpdate({ _id: questioner.user }, { categoryID: regularCat._id }, { new: true })
         console.log(user);
         return user
 
