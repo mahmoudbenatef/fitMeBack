@@ -28,7 +28,7 @@ const messageSchema = new mongoose.Schema({
     writeConcern: {
         j: true,
         wtimeout: 1000,
-    },
+    }
 });
 const MessageModel = mongoose.model("Message", messageSchema);
 module.exports = MessageModel;

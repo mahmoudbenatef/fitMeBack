@@ -29,13 +29,14 @@ const exerciseSchema = new mongoose.Schema({
     required: true,
   },
   notAllowedTo: [String],
-},
-  {
+}
+  , {
     writeConcern: {
       j: true,
       wtimeout: 1000,
-    },
-  });
+    }
+  }
+);
 
 const ExerciseModel = mongoose.model("Exercise", exerciseSchema);
 module.exports = ExerciseModel;

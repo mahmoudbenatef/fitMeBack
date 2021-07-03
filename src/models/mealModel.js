@@ -26,12 +26,12 @@ const MealScheme = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-},
-  {
+}
+  , {
     writeConcern: {
       j: true,
       wtimeout: 1000,
-    },
+    }
   });
 
 const MealModel = mongoose.model("Meal", MealScheme);

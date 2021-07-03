@@ -84,14 +84,12 @@ const PlanScheme = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-},
-    {
-        writeConcern: {
-            j: true,
-            wtimeout: 1000,
-        },
+}, {
+    writeConcern: {
+        j: true,
+        wtimeout: 1000,
     }
-);
+});
 const PlanModel = mongoose.model("Plan", PlanScheme);
 module.exports = PlanModel;
 

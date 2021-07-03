@@ -52,6 +52,7 @@ const getAll = async (req, res) => {
 };
 const getAvailCamps = async (req, res) => {
     try {
+        // log
         var today = new Date();
         const camps = await CampModel.find({ date: { $gt: today } });
         res.status(200).json(camps);
