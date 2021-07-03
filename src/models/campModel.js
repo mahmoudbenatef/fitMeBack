@@ -25,7 +25,16 @@ const CampScheme = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+}, {
+  writeConcern: {
+    j: true,
+    wtimeout: 1000,
+  },
+}
+
+
+
+);
 
 const CampModel = mongoose.model("Camp", CampScheme);
 module.exports = CampModel;

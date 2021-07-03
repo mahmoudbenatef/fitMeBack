@@ -5,8 +5,8 @@ const CategoryModel = require("../models/categoryModel")
 const createOne = async (req, res) => {
     try {
         const doc = await new QuestionerModel({ ...req.body }).save();
-        updateUserCategory(req.body)
-        res.status(201).json({ data: { ...req.body } });
+        const user = await updateUserCategory(req.body)
+        res.status(200).json(user);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -35,6 +35,7 @@ const updateUserQuestioner = async (req, res) => {
     }
 }
 const updateUserCategory = async (questioner) => {
+    var user;
     if (questioner.majorOrMinorSurgeryShouldBeMadeAwareOf || questioner.takingAnyMedicationOfWhichWeShouldBeMadeAwareOf
         || questioner.reasonWhyYouShouldNotParticipateInPhysicalActivity || questioner.highLowBloodPressure
         || questioner.jointProblem || questioner.feelFaintOrDizzy || questioner.feelPainInYourChest
@@ -42,12 +43,15 @@ const updateUserCategory = async (questioner) => {
     ) {
         const exceptionalCat = await CategoryModel.findOne({ label: 'exceptional' })
 
-        await UserModel.findOneAndUpdate({ _id: questioner.user }, { categoryID: exceptionalCat._id })
+        user = await UserModel.findOneAndUpdate({ _id: questioner.user }, { categoryID: exceptionalCat._id })
+        console.log(user);
+        return user
     }
     else {
         const regularCat = await CategoryModel.findOne({ label: 'regular' })
-
-        await UserModel.findOneAndUpdate({ _id: questioner.user }, { categoryID: regularCat._id })
+        user = await UserModel.findOneAndUpdate({ _id: questioner.user }, { categoryID: regularCat._id })
+        console.log(user);
+        return user
 
     }
 
