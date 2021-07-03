@@ -10,6 +10,12 @@ const conversationSchema = new mongoose.Schema({
         },
     ],
 
-});
+},
+    {
+        writeConcern: {
+            j: true,
+            wtimeout: 1000,
+        },
+    });
 const ConversationModel = mongoose.model("Conversation", conversationSchema);
 module.exports = ConversationModel;

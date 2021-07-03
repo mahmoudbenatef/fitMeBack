@@ -86,7 +86,13 @@ const UserScheme = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+}
+  , {
+    writeConcern: {
+      j: true,
+      wtimeout: 1000,
+    },
+  });
 
 UserScheme.methods.comparePassword = function (password, hash_password) {
   try {
